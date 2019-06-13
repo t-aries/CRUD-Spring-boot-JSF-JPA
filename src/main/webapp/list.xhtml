@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+    <h:form>
+        <h2>Employee List</h2>
+        <!--        search-->
+        <p:outputLabel value="Name:         "/>
+        <p:inputText id="name" value="#{empController.employee.name}"/><br/>
+
+        <p:outputLabel value="Employee Code: "/>
+        <p:inputText id="employeeCode" value="#{empController.employee.employeeCode}"/><br/>
+
+        <p:outputLabel value="Department:   "/>
+        <h:selectOneMenu id="department" value="#{empController.employee.department}">
+            <f:selectItem itemLabel="" itemValue=""/>
+            <f:selectItem itemLabel="DEV" itemValue="DEV"/>
+            <f:selectItem itemLabel="TEST" itemValue="TEST"/>
+            <f:selectItem itemLabel="BUSINESS" itemValue="BUSINESS"/>
+        </h:selectOneMenu><br/>
+
+        <p:outputLabel value="Salary from: "/>
+        <p:inputText id="num1" value="#{empController.salaryFrom}"/>
+
+        <p:outputLabel value=" to: "/>
+        <p:inputText id="num2" value="#{empController.salaryTo}"/><br/>
+
+        <h:commandButton value="Search"
+                         action="#{empController.searchName(empController.employee.name,
+                             empController.employee.employeeCode,
+                             empController.employee.department,empController.salaryFrom,empController.salaryTo)}"/><br/>
+        <h:commandButton value="Back to list" action="#{empController.init()}"/>
+
+
+        <!--        Add employee-->
+        <h:commandButton action="#{empController.add()}" value="Add employee"/>
+
+        <!--        List table-->
+        <p:dataTable var="emp" value="#{empController.employees}">
+
+            <p:column headerText="Code">
+                <h:outputText value="#{emp.employeeCode}"/>
+            </p:column>
+
+            <p:column headerText="Name">
+                <h:outputText value="#{emp.name}"/>
+            </p:column>
+
+            <p:column headerText="Date Start">
+                <h:outputText value="#{emp.dateStart}"/>
+            </p:column>
+
+            <p:column headerText="Department">
+                <h:outputText value="#{emp.department}"/>
+            </p:column>
+
+            <p:column headerText="Manager">
+                <h:outputText value="#{emp.manager}"/>
+            </p:column>
+
+            <p:column headerText="Work">
+                <h:outputText value="#{emp.work}"/>
+            </p:column>
+
+            <p:column headerText="Salary">
+                <h:outputText value="#{emp.salary}"/>
+            </p:column>
+            <p:column headerText="DELETE">
+                <h:commandButton action="#{empController.delete(emp)}" value="Delete"/>
+            </p:column>
+            <p:column headerText="EDIT">
+                <h:commandButton action="#{empController.viewEdit(emp)}" value="Edit"/>
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>

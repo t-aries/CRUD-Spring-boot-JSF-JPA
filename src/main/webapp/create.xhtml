@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+    <f:view>
+        <h:form>
+            <h3>New Employee</h3>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><h:inputText id="name" value="#{empController.employee.name}" required="true">
+                        <f:validateLength minimum="2" maximum="20" />
+                    </h:inputText>
+                        <h:message for="name" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td>Employee Code</td>
+                    <td><h:inputText id="employeeCode" value="#{empController.employee.employeeCode}" required="true">
+                        <f:validateRegex pattern="[a-z0-9A-Z]{3,8}" />
+                    </h:inputText>
+                        <h:message for="employeeCode" style="color:red"/></td>
+                </tr>
+
+                <tr>
+                    <td>Manager</td>
+                    <td><h:inputText id="manager" value="#{empController.employee.manager}"/></td>
+                </tr>
+
+                <tr>
+                    <td>Date Start</td>
+                    <td><h:inputText id="dateStart" value="#{empController.employee.dateStart}"/></td>
+                </tr>
+
+                <tr>
+                    <td>Work</td>
+                    <td><h:inputText id="work" value="#{empController.employee.work}"/></td>
+                </tr>
+
+                <tr>
+                    <td>Department</td>
+<!--                    <td><h:inputText id="department" value="#{empController.employee.department}"/></td>-->
+                    <td>
+                        <h:selectOneMenu id="department" value="#{empController.employee.department}">
+                            <f:selectItem itemLabel="DEV" itemValue="DEV"/>
+                            <f:selectItem itemLabel="TEST" itemValue="TEST" />
+                            <f:selectItem itemLabel="BUSINESS" itemValue="BUSINESS" />
+                        </h:selectOneMenu>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Salary</td>
+                    <td><h:inputText id="salary" value="#{empController.employee.salary}" required="true">
+
+                    </h:inputText>
+                        <h:message for="salary" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><h:commandButton value="Save" action="#{empController.save()}"/></td>
+                </tr>
+
+            </table>
+        </h:form>
+
+    </f:view>
+</h:body>
+</html>
