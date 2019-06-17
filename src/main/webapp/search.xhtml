@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+    <h:form>
+
+        <p:outputLabel value="Name: "/>
+        <p:inputText id="name" value="#{empController.name}"/><br/>
+
+        <p:outputLabel value="Employee Code: "/>
+        <p:inputText id="employeeCode" value="#{empController.employee.employeeCode}"/><br/>
+
+        <p:outputLabel value="Department:   "/>
+        <h:selectOneMenu id="department" value="#{empController.employee.department}">
+            <f:selectItem itemLabel="" itemValue=""/>
+            <f:selectItem itemLabel="DEV" itemValue="DEV"/>
+            <f:selectItem itemLabel="TEST" itemValue="TEST"/>
+            <f:selectItem itemLabel="BUSINESS" itemValue="BUSINESS"/>
+        </h:selectOneMenu><br/>
+
+        <p:outputLabel value="Manager:   "/>
+        <h:selectOneMenu id="manager" value="#{empController.employee.manager}">
+            <f:selectItem itemValue=""/>
+            <f:selectItem itemValue="Mr Vinh"/>
+            <f:selectItem itemValue="Mr Dai"/>
+            <f:selectItem itemValue="Mr Toan"/>
+        </h:selectOneMenu><br/>
+
+        <p:outputLabel value="Salary from: "/>
+        <p:inputText id="num1" value="#{empController.salaryFrom}"/>
+
+        <p:outputLabel value=" to: "/>
+        <p:inputText id="num2" value="#{empController.salaryTo}"/><br/>
+
+        <h:commandButton value="Search"
+                         action="#{empController.searchName(empController.name,
+                             empController.employee.employeeCode,
+                             empController.employee.department,empController.salaryFrom,empController.salaryTo)}"/><br/>
+        <h:commandButton value="Back to list" action="#{empController.getBackList()}"/>
+    </h:form>
+</h:body>
+</html>

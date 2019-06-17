@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.PostConstruct;
+import javax.el.MethodExpression;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
@@ -15,7 +16,7 @@ import java.util.List;
 //@Controller
 @SessionScoped
 @Named
-@Join(path = "/", to="list.jsf")
+@Join(path = "/", to="search.jsf")
 public class EmpController {
     @Autowired
     EmpService empService;
@@ -29,36 +30,41 @@ public class EmpController {
     private String salaryTo;
 
     @PostConstruct
-    public void init() {
+    public String init() {
         employees = empService.findAll();
+        return "/data.xhtml?faces-redirect=true";
+    }
+    public String searchView() {
+        this.employee = new Employee();
+        return "/search.xhtml?faces-redirect=true";
     }
     public String searchName(String name, String employeeCode, String department, Double salaryFrom, Double salaryTo) {
         employees = empService.findbyName(name, employeeCode, department, salaryFrom, salaryTo);
-        return "list.xhtml?faces-redirect=true";
+        return "/data.xhtml?faces-redirect=true";
     }
-    public String save() {
+    public String create() {
         this.empService.create(employee);
         employees = empService.findAll();
-        return "/list.xhtml?faces-redirect=true";
+        return "/data.xhtml?faces-redirect=true";
     }
 
-    public String add() {
+    public String createView() {
         this.employee = new Employee();
         return "/create.xhtml?faces-redirect=true";
     }
     public String delete(Employee employee) {
         this.empService.delete(employee);
-        this.init();
-        return "/list.xhtml?faces-redirect=true";
+        employees = empService.findAll();
+        return "/data.xhtml?faces-redirect=true";
     }
-    public String viewEdit(Employee employee){
+    public String editView(Employee employee){
         this.employee = employee;
         return "/edit.xhtml?faces-redirect=true";
     }
     public String edit(Employee employee){
         this.empService.edit(employee);
-        this.init();
-        return "/list.xhtml?faces-redirect=true";
+        employees = empService.findAll();
+        return "/data.xhtml?faces-redirect=true";
     }
 
     public List<Employee> getEmployees() {
@@ -99,5 +105,9 @@ public class EmpController {
 
     public void setSalaryTo(String getSalaryTo) {
         this.salaryTo = getSalaryTo;
+    }
+
+    public String getBackList() {
+        return "/data.xhtml?faces-redirect=true";
     }
 }

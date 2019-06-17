@@ -14,7 +14,7 @@
         <h2>Employee List</h2>
         <!--        search-->
         <p:outputLabel value="Name:         "/>
-        <p:inputText id="name" value="#{empController.employee.name}"/><br/>
+        <p:inputText id="name" value="#{empController.name}"/><br/>
 
         <p:outputLabel value="Employee Code: "/>
         <p:inputText id="employeeCode" value="#{empController.employee.employeeCode}"/><br/>
@@ -34,7 +34,7 @@
         <p:inputText id="num2" value="#{empController.salaryTo}"/><br/>
 
         <h:commandButton value="Search"
-                         action="#{empController.searchName(empController.employee.name,
+                         action="#{empController.searchName(empController.name,
                              empController.employee.employeeCode,
                              empController.employee.department,empController.salaryFrom,empController.salaryTo)}"/><br/>
         <h:commandButton value="Back to list" action="#{empController.init()}"/>
