@@ -11,37 +11,15 @@
 
 <h:body>
     <h:form>
+        <h:commandButton action="#{empController.init}" value="Logout"/>
         <h2>Employee List</h2>
         <!--        search-->
-        <p:outputLabel value="Name:         "/>
-        <p:inputText id="name" value="#{empController.name}"/><br/>
-
-        <p:outputLabel value="Employee Code: "/>
-        <p:inputText id="employeeCode" value="#{empController.employee.employeeCode}"/><br/>
-
-        <p:outputLabel value="Department:   "/>
-        <h:selectOneMenu id="department" value="#{empController.employee.department}">
-            <f:selectItem itemLabel="" itemValue=""/>
-            <f:selectItem itemLabel="DEV" itemValue="DEV"/>
-            <f:selectItem itemLabel="TEST" itemValue="TEST"/>
-            <f:selectItem itemLabel="BUSINESS" itemValue="BUSINESS"/>
-        </h:selectOneMenu><br/>
-
-        <p:outputLabel value="Salary from: "/>
-        <p:inputText id="num1" value="#{empController.salaryFrom}"/>
-
-        <p:outputLabel value=" to: "/>
-        <p:inputText id="num2" value="#{empController.salaryTo}"/><br/>
-
         <h:commandButton value="Search"
-                         action="#{empController.searchName(empController.name,
-                             empController.employee.employeeCode,
-                             empController.employee.department,empController.salaryFrom,empController.salaryTo)}"/><br/>
-        <h:commandButton value="Back to list" action="#{empController.init()}"/>
+                         action="#{empController.searchView}"/><br/>
 
 
         <!--        Add employee-->
-        <h:commandButton action="#{empController.add()}" value="Add employee"/>
+        <h:commandButton action="#{empController.createView}" value="Add employee"/>
 
         <!--        List table-->
         <p:dataTable var="emp" value="#{empController.employees}">
@@ -73,11 +51,9 @@
             <p:column headerText="Salary">
                 <h:outputText value="#{emp.salary}"/>
             </p:column>
-            <p:column headerText="DELETE">
+            <p:column headerText="Other">
                 <h:commandButton action="#{empController.delete(emp)}" value="Delete"/>
-            </p:column>
-            <p:column headerText="EDIT">
-                <h:commandButton action="#{empController.viewEdit(emp)}" value="Edit"/>
+                <h:commandButton action="#{empController.editView(emp)}" value="Edit"/>
             </p:column>
 
         </p:dataTable>

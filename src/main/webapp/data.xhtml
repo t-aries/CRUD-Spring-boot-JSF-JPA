@@ -48,9 +48,10 @@
             </p:column>
 
         </p:dataTable>
-    <h:commandButton action="#{empController.createView()}" value="Add employee"/>
-    <h:commandButton value="Search"
-                        action="#{empController.searchView()}"/>
+        <h:commandButton action="#{empController.createView()}" value="Add employee"/>
+        <h:commandButton value="Search"
+                         action="#{empController.searchView()}"/>
+        <h:commandButton value="back to list" action="#{empController.view}"/>
     </h:form>
 </h:body>
 </html>

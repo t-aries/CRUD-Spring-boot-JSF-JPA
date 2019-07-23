@@ -16,7 +16,7 @@ import java.util.List;
 //@Controller
 @SessionScoped
 @Named
-@Join(path = "/", to="search.jsf")
+@Join(path = "/", to = "login.jsf")
 public class EmpController {
     @Autowired
     EmpService empService;
@@ -24,47 +24,88 @@ public class EmpController {
     private List<Employee> employees;
 
     private Employee employee = new Employee();
-
+    private String username;
+    private String password;
     private String name;
     private String salaryFrom;
     private String salaryTo;
 
     @PostConstruct
     public String init() {
-        employees = empService.findAll();
-        return "/data.xhtml?faces-redirect=true";
+        return "/login.xhtml?faces-redirect=true";
     }
+    public String view(){
+        employees = empService.findAll();
+        return "/list.xhtml?faces-redirect=true";
+    }
+
+    public String check() {
+        if (username.equals("truyen") && password.equals("1234")) {
+            return view();
+        }
+        else
+            return init();
+    }
+
     public String searchView() {
         this.employee = new Employee();
         return "/search.xhtml?faces-redirect=true";
     }
+
     public String searchName(String name, String employeeCode, String department, Double salaryFrom, Double salaryTo) {
         employees = empService.findbyName(name, employeeCode, department, salaryFrom, salaryTo);
         return "/data.xhtml?faces-redirect=true";
     }
+
     public String create() {
         this.empService.create(employee);
         employees = empService.findAll();
-        return "/data.xhtml?faces-redirect=true";
+        return view();
     }
 
     public String createView() {
         this.employee = new Employee();
         return "/create.xhtml?faces-redirect=true";
     }
+
     public String delete(Employee employee) {
         this.empService.delete(employee);
-        employees = empService.findAll();
-        return "/data.xhtml?faces-redirect=true";
+        return view();
     }
-    public String editView(Employee employee){
+
+    public String editView(Employee employee) {
         this.employee = employee;
         return "/edit.xhtml?faces-redirect=true";
     }
-    public String edit(Employee employee){
+
+    public EmpService getEmpService() {
+        return empService;
+    }
+
+    public void setEmpService(EmpService empService) {
+        this.empService = empService;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String edit(Employee employee) {
         this.empService.edit(employee);
         employees = empService.findAll();
-        return "/data.xhtml?faces-redirect=true";
+        return "/list.xhtml?faces-redirect=true";
     }
 
     public List<Employee> getEmployees() {

@@ -60,13 +60,12 @@
                     <h:message for="salary" style="color:red"/></td>
             </tr>
             <tr>
-                <h:commandButton value="Save" action="#{empController.create()}"/>
+                <td><h:commandButton value="Save" action="#{empController.create()}"/></td>
             </tr>
         </table>
     </h:form>
-
     <h:form>
-        <h:commandButton value="Cancel" action="#{empController.getBackList()}"/>
+        <h:commandButton value="Back to list" action="#{empController.view()}"/>
     </h:form>
 </h:body>
 </html>
